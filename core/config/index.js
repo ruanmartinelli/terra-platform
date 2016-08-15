@@ -11,6 +11,10 @@ const config = {
             "database": "",
             "user": "",
             "password": "",
+        },
+        "channel":{
+            "pub_name": "test",
+            "addr":"tcp://localhost:5563"
         }
     }
 }
