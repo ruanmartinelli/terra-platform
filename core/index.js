@@ -1,17 +1,21 @@
-var express = require('express'),
-    config = require('./config'),
-    chalk = require('chalk'),
-    bodyParser = require('body-parser');
+const express   = require('express'),
+    chalk       = require('chalk'),
+    bodyParser  = require('body-parser');
 
-var app = express();
+const app = express();
+
+const apis = require('./api'),
+    config = require('./config'),
+    channel = require('./channel');
 
 app.use(bodyParser.json())
 app.use(express.static(__dirname + '/../public'));
 
-// serves the index.html
-app.get('/', (req, res, next) => {
-    res.sendFile(__dirname + "/../public/index.html")
-})
+// initializes listeners
+channel.startProxyListener(app);
+
+// add new apis here
+apis.clientApi(app);
 
 // middleware for error-handling
 app.use((err, req, res, next) => {
