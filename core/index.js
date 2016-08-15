@@ -12,7 +12,8 @@ app.use(bodyParser.json())
 app.use(express.static(__dirname + '/../public'));
 
 // initializes listeners
-channel.startProxyListener(app);
+channel.proxy.init();
+channel.proxy.listen();
 
 // add new apis here
 apis.clientApi(app);

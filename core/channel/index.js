@@ -1,32 +1,31 @@
-const   zmq     = require('zmq'),
-        http    = require('http'),//.Server(app),
-        io      = require('socket.io')(http)
+const zmq = require('zmq');
 
 const subscriber = zmq.socket('sub')
 
 const config = require('../config')
 
-function startProxyListener(app){
-    subscriber.on('message', function(){
-        let messages = [];
+const proxyChannel = {
+    init: function(){
+        subscriber.subscribe(config.channel.pub_name)
+        subscriber.connect(config.channel.addr)
 
-        Array.prototype.slice.call(arguments).forEach(function(arg) {
-            messages.push(arg.toString());
+        subscriber.on('disconnect', function(){
+            console.log("Disconnected from channel.");
+        })
+    },
+    listen: function(){
+        console.log("Listening notifications from " + config.channel.pub_name + " channel.");
+        subscriber.on('message', function(){
+            let messages = [];
+
+            Array.prototype.slice.call(arguments).forEach(function(arg) {
+                messages.push(arg.toString());
+            });
+            console.log(messages);
         });
-
-        console.log(messages);
-    })
-
-
-    subscriber.on('disconnect', function(){
-        console.log("disconnect");
-    })
-
-    subscriber.connect(config.channel.addr)
-    subscriber.subscribe(config.channel.pub_name)
+    }
 }
 
-
 module.exports = {
-    startProxyListener: startProxyListener
+    proxy: proxyChannel
 }
