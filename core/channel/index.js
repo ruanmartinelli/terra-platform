@@ -25,7 +25,29 @@ const proxyChannel = {
         });
     }
 }
+const droolsChannel = {
+    init: function(){
+        subscriber.subscribe(config.channel.pub_name)
+        subscriber.connect(config.channel.addr)
+
+        subscriber.on('disconnect', function(){
+            console.log("Disconnected from channel.");
+        })
+    },
+    listen: function(){
+        console.log("Listening notifications from " + config.channel.pub_name + " channel.");
+        subscriber.on('message', function(){
+            let messages = [];
+
+            Array.prototype.slice.call(arguments).forEach(function(arg) {
+                messages.push(arg.toString());
+            });
+            console.log(messages);
+        });
+    }
+}
 
 module.exports = {
-    proxy: proxyChannel
+    proxy: proxyChannel,
+    drools: droolsChannel
 }

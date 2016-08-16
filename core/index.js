@@ -15,6 +15,9 @@ app.use(express.static(__dirname + '/../public'));
 channel.proxy.init();
 channel.proxy.listen();
 
+//channel.drools.init();
+//channel.drools.listen();
+
 // add new apis here
 apis.clientApi(app);
 
