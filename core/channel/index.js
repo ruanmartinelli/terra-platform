@@ -1,7 +1,5 @@
 const zmq = require('zmq');
-
 const subscriber = zmq.socket('sub')
-
 const config = require('../config')
 
 const proxyChannel = {
@@ -22,6 +20,11 @@ const proxyChannel = {
                 messages.push(arg.toString());
             });
             console.log(messages);
+
+            let jsonMessage = JSON.parse(messages[0]);
+
+            // TODO Save message to db;
+            // TODO emit message via socket;
         });
     }
 }
