@@ -9,7 +9,7 @@ const config = {
         "db":{
             "host" : "localhost",
             "database": "",
-            "user": "",
+            "user": "root",
             "password": "",
         },
         "channel":{
