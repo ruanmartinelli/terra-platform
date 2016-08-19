@@ -2,7 +2,9 @@ const express   = require('express'),
     chalk       = require('chalk'),
     bodyParser  = require('body-parser');
 
-const app = express();
+const app = express(),
+        http = require('http').Server(app),
+        io = require('socket.io')(http);
 
 const apis = require('./api'),
     config = require('./config'),
@@ -12,8 +14,8 @@ app.use(bodyParser.json())
 app.use(express.static(__dirname + '/../public'));
 
 // initializes listeners
-channel.proxy.init();
-channel.proxy.listen();
+channel.proxy.init(io);
+// channel.proxy.listen();
 
 //channel.drools.init();
 //channel.drools.listen();
@@ -36,5 +38,7 @@ app.use((err, req, res, next) => {
 })
 
 // starts up the server
-app.listen(config.app.port);
+// app.listen(config.app.port);
+http.listen(7000, function(){
+});
 console.log(chalk.bgRed("Server listening on port: "+ config.app.port));
