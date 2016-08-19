@@ -8,7 +8,7 @@ const config = {
         },
         "db":{
             "host" : "localhost",
-            "database": "",
+            "database": "terra-db",
             "user": "root",
             "password": "",
         },
@@ -19,4 +19,5 @@ const config = {
     }
 }
 
-module.exports = process.env.NODE_ENV == "production"? config.production : config.development;
+module.exports = config.development
+// module.exports = process.env.NODE_ENV == "production"? config.production : config.development;

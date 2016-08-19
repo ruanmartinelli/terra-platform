@@ -1,10 +1,12 @@
+const config = require('../config')
+
 const dbConfig = {
     client: 'mysql',
     connection: {
-        host     : config.development.db.host,
-        user     : config.development.db.user,
-        password : config.development.db.password,
-        database : config.development.db.database
+        host     : config.db.host,
+        user     : config.db.user,
+        password : config.db.password,
+        database : config.db.database
     },
     debug:true
 }
