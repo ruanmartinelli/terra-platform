@@ -49,7 +49,9 @@ const proxyChannel = {
                 "target": jsonMessage["Target"],
                 "content": jsonMessage["d8"].concat(jsonMessage["d16"]).concat(jsonMessage["d32"])
             }
-            messageModel.add(messageToSave)
+
+            // TODO test before uncomment
+            // messageModel.add(messageToSave)
 
             // TODO emit message via socket;
             io.emit('new_data', messages[1]);
