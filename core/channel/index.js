@@ -1,35 +1,56 @@
 const zmq = require('zmq');
 const subscriber = zmq.socket('sub')
 const config = require('../config')
-// var io// = require('socket.io');
+const messageModel = require('../model/message-model')
 
 const proxyChannel = {
-    init: function(io){
-        // io = require('socket.io')(require('http').createServer(app));
+    init: function(){
         subscriber.subscribe(config.channel.pub_name)
         subscriber.connect(config.channel.addr)
 
         subscriber.on('disconnect', function(){
             console.log("Disconnected from channel.");
         })
-    // },
-    // listen: function(){
+    },
+
+    listen: function(io){
         console.log("Listening notifications from " + config.channel.pub_name + " channel.");
 
         io.on('connection', function(socket){
             console.log("Web Client connected!");
         });
 
+        // listens for messages from the proxy
         subscriber.on('message', function(){
             let messages = [];
 
-            Array.prototype.slice.call(arguments).forEach(function(arg) {
+            // creates the message object
+            Array.prototype.slice.call(arguments)
+            .forEach(function(arg){
                 messages.push(arg.toString());
             });
+
             console.log(messages);
 
+            // Message object:
+            //  {
+            //      msgID : {string}
+            //      Source : {string}
+            //      Target : {string}
+            //      d8 : {string}
+            //      d16 : {string}
+            //      d32 : {string}
+            //  }
             let jsonMessage = JSON.parse(messages[1]);
-            // TODO Save message to db;
+
+            let messageToSave = {
+                "id_sensor" : jsonMessage["Source"],
+                "number" : jsonMessage["msgID"],
+                "target": jsonMessage["Target"],
+                "content": jsonMessage["d8"].concat(jsonMessage["d16"]).concat(jsonMessage["d32"])
+            }
+            messageModel.add(messageToSave)
+
             // TODO emit message via socket;
             io.emit('new_data', messages[1]);
         });

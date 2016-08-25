@@ -15,7 +15,7 @@ app.use(express.static(__dirname + '/../public'));
 
 // initializes listeners
 channel.proxy.init(io);
-// channel.proxy.listen();
+channel.proxy.listen(io);
 
 //channel.drools.init();
 //channel.drools.listen();
