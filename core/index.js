@@ -1,6 +1,7 @@
 const express   = require('express'),
     chalk       = require('chalk'),
-    bodyParser  = require('body-parser');
+    bodyParser  = require('body-parser'),
+    cors        = require('cors');
 
 const app = express(),
         http = require('http').Server(app),
@@ -12,6 +13,8 @@ const apis = require('./api'),
 
 app.use(bodyParser.json())
 app.use(express.static(__dirname + '/../public'));
+app.use(cors());
+
 
 // initializes listeners
 channel.proxy.init(io);
