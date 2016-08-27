@@ -21,18 +21,49 @@ function clientApi(app){
     app.del ('/api/sensors/:sensor_id',   controller.sensor.delete);
 
     app.post('/api/bytecode/new', upload.single('code'), (req, res, next) => {
-        let api_lua = "";
+        let api_lua = "http://localhost:8888/filevmx";
         let file_content = req.file.buffer.toString('utf8');
+        console.log(file_content)
+        var options = {
+          method:"POST",
+          uri: api_lua,
+          body:{
+            conteudo: file_content
+          },
+          headers: {
+            "Content-Type" : "application/json"
+          },
+          json:true
+        };
 
-        request.post(api_lua, file_content)
+        request(options)
+        .then(response => {
+            console.log("Response");
+            res.send({success: true, content: response});
+        })
+        .catch(error => {
+            res.send({success: false, error: error});
+        })
+
+
+        /*request.post({uri: api_lua, headers: {
+          "Content-Type" : "application/json"
+        }}, {conteudo:file_content})
         .then(response => {
             console.log("Response");
             res.send({success: true, content: file_content});
         })
         .catch(error => {
             res.send({success: false, error: error});
+        })*/
+        /*request.get(api_lua)
+        .then(response => {
+            console.log("Response");
+            res.send({success: true, content: file_content});
         })
-
+        .catch(error => {
+            res.send({success: false, error: error});
+        })*/
 
     })
 }

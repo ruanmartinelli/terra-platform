@@ -23,8 +23,21 @@ vID = tonumber( version_file:read('*l')) ;
 print ('vID do arquivo ' .. vID);
 version_file:close()
 
-function Handler:post()
+function Handler:options()
+  --if (config.turbo.CORS) then
+    self:add_header('Access-Control-Allow-Methods', 'POST')
+    self:add_header('Access-Control-Allow-Headers', 'content-type')
+    self:add_header('Access-Control-Allow-Origin', '*')
+  --end
+end
 
+function Handler:get()
+  self:write("GET OK")
+end
+
+function Handler:post()
+print(self.request.body)
+--conteudo = self.request.body;
 local json = turbo.escape.json_decode(self.request.body);
 conteudo = json.conteudo;
 
@@ -241,7 +254,7 @@ end
 
 
   local app = turbo.web.Application:new({
-      {"/disseminaaewfih", Handler}
+      {"/filevmx", Handler}
   })
 
   app:listen(8888)
