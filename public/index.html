@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.6/css/skins/skin-blue.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.css">
+    <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.css"> -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.css" />
 
 </head>
@@ -53,6 +53,7 @@
                         <li class="header">MAIN NAVIGATION</li>
                         <li><a href="#"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
                         <li><a ng-href="#/sensors/"><i class="fa fa-sitemap"></i> <span> Sensors</span></a></li>
+                        <li><a ng-href="#/bytecodes/"><i class="fa fa-code"></i> <span> Bytecode</span></a></li>
                     </ul>
                 </section>
             </aside>
@@ -78,6 +79,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-animate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.5/ng-file-upload.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.8/socket.io.min.js" charset="utf-8"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.6/js/app.min.js" charset="utf-8"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js" charset="utf-8"></script>
@@ -92,12 +94,16 @@
 
     <script src="/src/app.js" charset="utf-8"></script>
     <script src="/src/app-directives.js" charset="utf-8"></script>
+
     <script src="/src/sensor/js/sensor-service.js" charset="utf-8"></script>
     <script src="/src/sensor/js/sensor-controller.js" charset="utf-8"></script>
 
+    <script src="/src/bytecode/js/bytecode-service.js" charset="utf-8"></script>
+    <script src="/src/bytecode/js/bytecode-controller.js" charset="utf-8"></script>
+
     <!-- Socket.io -->
     <script>
-    
+
     </script>
 </body>
 </html>

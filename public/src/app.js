@@ -1,4 +1,5 @@
-var app = angular.module('terraweb', ['ngRoute', 'ui.bootstrap', 'ngAnimate', 'angular-loading-bar', 'angularUtils.directives.dirPagination']);
+var app = angular.module('terraweb',
+['ngRoute', 'ui.bootstrap', 'ngAnimate', 'angular-loading-bar', 'angularUtils.directives.dirPagination', 'ngFileUpload']);
 
 var socket = io();
 socket.on('new_data', function(msg){
@@ -62,9 +63,24 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
         templateUrl : 'src/sensor/html/sensor-edit.html'
     })
 
+    // dashboard
     .when('/dashboard/', {
-        controller : 'SensorListController',
+        controller : 'DashboardListController',
         templateUrl : 'src/sensor/html/sensor-list.html'
+    })
+
+    //bytecodes
+    .when('/bytecodes/', {
+        controller : 'BytecodeListController',
+        templateUrl : 'src/bytecode/html/bytecode-list.html'
+    })
+    .when('/bytecodes/new', {
+        controller : 'BytecodeNewController',
+        templateUrl : 'src/bytecode/html/bytecode-new.html'
+    })
+    .when('/bytecodes/:id', {
+        controller : 'BytecodeEditController',
+        templateUrl : 'src/bytecode/html/bytecode-edit.html'
     })
 
 
