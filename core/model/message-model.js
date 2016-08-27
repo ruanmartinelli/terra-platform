@@ -13,7 +13,7 @@ module.exports = {
     },
 
     add : function(message){
-        let m = _.pick(message, _.without(columns, 'created_at'))
+        let m = _.pick(message, _.without(columns, 'created_at'));
         return crud.add(message, table, columns);
     },
 

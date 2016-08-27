@@ -91,16 +91,13 @@
     <script src="/assets/dir-pagination.js" charset="utf-8"></script>
 
     <script src="/src/app.js" charset="utf-8"></script>
+    <script src="/src/app-directives.js" charset="utf-8"></script>
     <script src="/src/sensor/js/sensor-service.js" charset="utf-8"></script>
     <script src="/src/sensor/js/sensor-controller.js" charset="utf-8"></script>
 
     <!-- Socket.io -->
     <script>
-    var socket = io();
-    socket.on('new_data', function(msg){
-        console.log(msg);
-        $('#messages').append($('<li>').text(msg));
-    });
+    
     </script>
 </body>
 </html>

@@ -1,3 +1,4 @@
+SensorListController.$inject = ['$scope', 'sensorService']
 function SensorListController($scope, sensorService){
     $scope.sensors = [];
 
@@ -14,21 +15,36 @@ function SensorListController($scope, sensorService){
     $scope.find = sensorService.find;
 }
 
-function SensorNewController($scope){
+SensorNewController.$inject = ['$scope', 'sensorService'];
+function SensorNewController($scope, sensorService){
+    $scope.sensor = {};
 
+    let promises = [];
+
+    $scope.add = sensorService.add;
 }
 
-function SensorEditController($scope, $routeParams){
+SensorEditController.$inject = ['$scope','$routeParams', 'sensorService'];
+function SensorEditController($scope, $routeParams, sensorService){
+    $scope.sensor = {};
 
+    let promises = [];
+    let getSensor = sensorService.get($routeParams.id);
+
+    promises.push(getSensor);
+
+    Promise.all(promises)
+    .then(result => {
+        $scope.sensor = result[0];
+    })
+
+    $scope.update = sensorService.update;
 }
 
 
 
 
-SensorListController.$inject = ['$scope', 'sensorService']
-SensorNewController.$inject = ['$scope']
-SensorEditController.$inject = ['$scope','$routeParams']
 
-app.controller('SensorListController',SensorListController)
-app.controller('SensorNewController', SensorNewController)
-app.controller('SensorEditController',SensorEditController)
+app.controller('SensorListController',SensorListController);
+app.controller('SensorNewController', SensorNewController);
+app.controller('SensorEditController',SensorEditController);

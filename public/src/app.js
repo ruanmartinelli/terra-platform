@@ -1,5 +1,11 @@
 var app = angular.module('terraweb', ['ngRoute', 'ui.bootstrap', 'ngAnimate', 'angular-loading-bar', 'angularUtils.directives.dirPagination']);
 
+var socket = io();
+socket.on('new_data', function(msg){
+    console.log(msg);
+    $('#messages').append($('<li>').text(msg));
+});
+
 var alert = function(){
     return {
         success: function(message, title, options){
@@ -54,6 +60,11 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     .when('/sensors/:id', {
         controller : 'SensorEditController',
         templateUrl : 'src/sensor/html/sensor-edit.html'
+    })
+
+    .when('/dashboard/', {
+        controller : 'SensorListController',
+        templateUrl : 'src/sensor/html/sensor-list.html'
     })
 
 

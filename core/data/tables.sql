@@ -17,7 +17,7 @@ CREATE TABLE `message` (
   PRIMARY KEY (`id`),
   KEY `fk_sensor_message` (`id_sensor`),
   CONSTRAINT `fk_sensor_message` FOREIGN KEY (`id_sensor`) REFERENCES `sensor` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=562 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- Fake data
 INSERT INTO `terra-db`.`sensor` (`code`, `vendor`, `model`) VALUES ('1', 'SUN', 'Sun SPOT');

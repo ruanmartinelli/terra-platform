@@ -25,7 +25,7 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center">ID</th>
-                                        <th >Vendor</th>
+                                        <th>Vendor</th>
                                         <th class="text-center">Model</th>
                                         <th class="text-center">Code</th>
                                         <th class="text-center">Created At</th>
@@ -34,7 +34,7 @@
                                 <tbody>
                                     <tr dir-paginate="sensor in sensors| filter:q| itemsPerPage:15">
                                         <td class="text-center">{{sensor.id}}</td>
-                                        <td >{{sensor.vendor | uppercase}}</td>
+                                        <td ><a ng-href="#/sensors/{{sensor.id}}">{{sensor.vendor | uppercase}}</a></td>
                                         <td class="text-center">{{sensor.model}}</td>
                                         <td class="text-center">{{sensor.code}}</td>
                                         <td class="text-center">{{sensor.created_at | date:'MM/dd/yyyy'}}</td>
@@ -43,6 +43,12 @@
                             </table>
                             <dir-pagination-controls class="pull-right"></dir-pagination-controls>
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 pull-right">
+                            <a class="btn btn-success btn-block" ng-href="#/sensors/new">New Sensor</a>
+                        </div>
+
                     </div>
                 </div>
             </div>

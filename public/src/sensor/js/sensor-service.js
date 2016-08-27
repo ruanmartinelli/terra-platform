@@ -1,4 +1,4 @@
-app.factory('sensorService', ['$http', function($http) {
+app.factory('sensorService', ['$http', '$location',function($http, $location) {
     return {
         get : function(id) {
             return $http
@@ -11,6 +11,11 @@ app.factory('sensorService', ['$http', function($http) {
         add: function(sensor){
             return $http
             .post('api/sensors/new', sensor)
+            .then(res => {
+                alert.success("Sensor saved successfully!");
+                $location.path('/sensors');
+                return res.data;
+            }, errorHandler)
         },
 
         find: function(filter){
@@ -27,13 +32,14 @@ app.factory('sensorService', ['$http', function($http) {
             .then(res => {
                 let name = res.data.nome;
 
-                alert.success(name + " saved successfully!")
+                $location.path('/sensors');
+                alert.success("Sensor saved successfully!")
                 return res.data;
             }, errorHandler)
         },
 
         remove: function(id){
-
+            alert.warning("Please implement me")
         }
     };
 } ]);

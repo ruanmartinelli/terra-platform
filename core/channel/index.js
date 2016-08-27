@@ -7,10 +7,6 @@ const proxyChannel = {
     init: function(){
         subscriber.subscribe(config.channel.pub_name)
         subscriber.connect(config.channel.addr)
-
-        subscriber.on('disconnect', function(){
-            console.log("Disconnected from channel.");
-        })
     },
 
     listen: function(io){
@@ -20,10 +16,14 @@ const proxyChannel = {
             console.log("Web Client connected!");
         });
 
+        subscriber.on('disconnect', function(){
+            console.log("Disconnected from channel.");
+        });
+
         // listens for messages from the proxy
         subscriber.on('message', function(){
             let messages = [];
-
+            console.log("message");
             // creates the message object
             Array.prototype.slice.call(arguments)
             .forEach(function(arg){
@@ -44,14 +44,14 @@ const proxyChannel = {
             let jsonMessage = JSON.parse(messages[1]);
 
             let messageToSave = {
-                "id_sensor" : jsonMessage["Source"],
+                // "id_sensor" : jsonMessage["Source"],
+                "id_sensor" : 562, // TODO remove hardcoding
                 "number" : jsonMessage["msgID"],
                 "target": jsonMessage["Target"],
                 "content": jsonMessage["d8"].concat(jsonMessage["d16"]).concat(jsonMessage["d32"])
             }
 
-            // TODO test before uncomment
-            // messageModel.add(messageToSave)
+            messageModel.add(messageToSave);
 
             // TODO emit message via socket;
             io.emit('new_data', messages[1]);

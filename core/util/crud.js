@@ -24,10 +24,10 @@ module.exports = {
         const query = qb(table).update(object).where('id', object['id'])
 
         return query
-        // .then(status => {
-        //     if(status === 1) return this.get(object['id'], table, column);
-        //     if(status === 0) return Promise.reject(new Error("Error updating object"));
-        // });
+        .then(status => {
+            if(status === 1) return this.get(object['id'], table, columns);
+            if(status === 0) return Promise.reject(new Error("Error updating object"));
+        });
     },
 
     find: function(filter, table, columns){
