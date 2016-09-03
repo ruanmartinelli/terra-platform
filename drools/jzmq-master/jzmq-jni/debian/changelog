@@ -1,0 +1,77 @@
+jzmq (3.1.0-1) precise; urgency=low
+  * Check changelog for updates
+
+ -- Trevor Bernard <trevor.bernard@gmail.com>  Thu, 10 Oct 2013 13:07:44 -0300
+
+jzmq (2.2.2-1) precise; urgency=low
+  * Fix issue #241 - Fix travis-ci build
+  * Update the appropriate build files to the correct version
+
+ -- Trevor Bernard <trevor.bernard@gmail.com>  Thu, 01 Aug 2013 09:02:27 -0300
+
+jzmq (2.2.1-1) precise; urgency=low
+  * Fix issue ZeroMQ 2.x compatibility
+
+ -- Trevor Bernard <trevor.bernard@gmail.com>  Mon, 29 Jul 2013 13:06:19 -0300
+
+jzmq (2.2.0-1) precise; urgency=low
+  * Add toString method to ZMsg
+  * Fix README, plus note about JeroMQ
+  * Add unit test for issue #216
+  * Fix NullPointerException in Poller and fix bad null login in JNI
+  * Fix issue #81 - invalid conversion from 'const jbyte*' to 'jbyte*'
+  * Fix zero copy send
+  * Add ByteBuffer API for send and recv
+  * Fix issue #226 - Socket and Context now implement CLoseable
+  * Fix issue #228 - Socket and Context no longer override finalize
+
+ -- Trevor Bernard <trevor.bernard@gmail.com>  Mon, 27 May 2013 21:46:40 -0300
+
+jzmq (2.1.3-1) precise; urgency=low
+  * Fix issue #200 - Correct inaccurate javadocs for setTCPKeepAliveInterval and setTCPKeepAliveIdle
+  * Fixed unregisterInternal to skip PollItems which were nulled by a previous unregisterInternal.
+  * Fix Issue #203 - An overriding instance method doesn't have to throw exceptions specified by it's superclass.
+  * Prevent EINVAL in setsockopt
+  * Fix issue #197 - Only sign artifacts when it's time to release
+  * Create CMakeLists.txt
+  * Work around to a Locale javac bug
+  * test added to verify sockopt ZMQ_XPUB_VERBOSE
+  * Add set method for sockopt ZMQ_XPUB_VERBOSE
+  * recvZeroCopy failure is hidden by failure to set position on ByteBuffer
+  * Fix #186 - Enforce only calling finalize once in Socket and Context
+  * Fixed ZMQ.Socket.setRecoveryInterval() to work with v3.0.0 and up.
+
+ -- Trevor Bernard <trevor.bernard@gmail.com>  Sun, 14 Apr 2013 21:04:55 -0300
+
+jzmq (2.1.2-1) precise; urgency=low
+
+  * Remove assert where runtime errors are more appropriate
+  * Use utf8 when compiling java
+  * Add unit test for REQ/REP send more
+  * Update comment on ZDispatcher to warn users about busy spin wait strategy
+  * Fix regression where compatibility with zmq 2.1.X was broken by zero copy
+
+ -- Trevor Bernard <trevor.bernard@gmail.com>  Sun, 17 Feb 2013 20:38:05 -0400
+
+jzmq (2.1.1-1) precise; urgency=low
+
+  * Add zero copy API to send and recv
+  * Remove asserts from get_context JNI
+  * Add ZLoop support
+  * Poller rewrite
+  * No longer c assert when trying to write to a closed Socket
+  * Add a continuous integration support through travis-ci
+
+ -- Trevor Bernard <trevor.bernard@gmail.com>  Sun, 17 Feb 2013 20:38:05 -0400
+
+jzmq (2.1.0-1) unstable; urgency=low
+
+  * Development release
+
+ -- Alois Bělaška <alois.belaska@gmail.com>  Thu, 09 Dec 2010 11:44:56 +0100
+
+jzmq (2.0.9-1) unstable; urgency=low
+
+  * Initial release
+
+ -- Alois Bělaška <alois.belaska@gmail.com>  Wed, 08 Dec 2010 11:15:56 +0100
