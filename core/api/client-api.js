@@ -20,6 +20,8 @@ function clientApi(app){
     app.put ('/api/sensors/',           controller.sensor.update);
     app.del ('/api/sensors/:sensor_id',   controller.sensor.delete);
 
+    app.post('/api/messages/', controller.message.find); // OK
+
     app.post('/api/bytecode/new', upload.single('code'), (req, res, next) => {
         let api_lua = "http://localhost:8888/filevmx";
         let file_content = req.file.buffer.toString('utf8');

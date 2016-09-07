@@ -65,8 +65,8 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 
     // dashboard
     .when('/dashboard/', {
-        controller : 'DashboardListController',
-        templateUrl : 'src/sensor/html/sensor-list.html'
+        controller : 'DashboardController',
+        templateUrl : 'src/dashboard/html/dashboard.html'
     })
 
     //bytecodes
