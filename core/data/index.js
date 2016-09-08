@@ -8,7 +8,7 @@ const dbConfig = {
         password : config.db.password,
         database : config.db.database
     },
-    debug:true
+    debug:false
 }
 const knex = require('knex')(dbConfig)
 

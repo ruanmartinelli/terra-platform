@@ -27,10 +27,14 @@ app.factory('dashboardService', ['$http', '$location',function($http, $location)
             })
             data = [data]; // needs to be a double array
 
-            return {
-                data,
-                labels
-            }
+            return { data, labels }
+        },
+        updateChart: function(chart, message){
+            chart.data      = _.drop(chart.data, 1);
+            chart.labels    = _.drop(chart.labels, 1);
+
+            chart.labels.push   (message.created_at);
+            chart.data.push     (message.content);
         }
     };
 } ]);
