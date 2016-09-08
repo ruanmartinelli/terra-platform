@@ -3,9 +3,14 @@ app.factory('dashboardService', ['$http', '$location',function($http, $location)
         getMessageLog : function() {
             return $http.post('/api/messages/', {})
             .then(res => {
-                return createLogString(res.data);
+                let log = [];
+                _.forEach(res.data, (mObject) => { log.push(this.createMessage(mObject))})
+                return log
             }, errorHandler)
         },
+        createMessage: function(object){
+            return "[" + object.created_at +"]" + "  Sensor " + object.id_sensor + "  | Message Content: " + object.content;
+        }
 
     };
 } ]);

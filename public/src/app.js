@@ -1,11 +1,38 @@
 var app = angular.module('terraweb',
 ['ngRoute', 'ui.bootstrap', 'ngAnimate', 'angular-loading-bar', 'angularUtils.directives.dirPagination', 'ngFileUpload']);
 
-var socket = io();
-socket.on('new_data', function(msg){
-    console.log(msg);
-    $('#messages').append($('<li>').text(msg));
-});
+app.factory('socket', ['$rootScope', function ($rootScope) {
+  var socket = io.connect();
+
+  return {
+    on: function (eventName, callback) {
+      function wrapper() {
+        var args = arguments;
+        $rootScope.$apply(function () {
+          callback.apply(socket, args);
+        });
+      }
+
+      socket.on(eventName, wrapper);
+
+      return function () {
+        socket.removeListener(eventName, wrapper);
+      };
+    },
+
+    emit: function (eventName, data, callback) {
+      socket.emit(eventName, data, function () {
+        var args = arguments;
+        $rootScope.$apply(function () {
+          if(callback) {
+            callback.apply(socket, args);
+          }
+        });
+      });
+    }
+  };
+}]);
+
 
 var alert = function(){
     return {

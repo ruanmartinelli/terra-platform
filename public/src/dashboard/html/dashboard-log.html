@@ -2,9 +2,16 @@
     <div class="row">
         <div class="col-lg-10 col-lg-offset-1">
             <div class="form-group">
-                <label>Message Log</label>
-                <textarea class="form-control unresizable" rows="10" ng-model="log" show-tail>
-                </textarea>
+                <fieldset class="form-group">
+                    <label class="control-label">Message Log</label>
+                    <select class="form-control"
+                        multiple=""
+                        size="10"
+                        ng-model="q"
+                        ng-options="m for m in log"
+                        required show-tail>
+                </select>
+            </fieldset>
             </div>
         </div>
     </div>

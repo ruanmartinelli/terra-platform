@@ -1,5 +1,5 @@
-DashboardController.$inject = ['$scope', 'dashboardService']
-function DashboardController($scope, dashboardService){
+DashboardController.$inject = ['$scope', 'dashboardService', 'socket']
+function DashboardController($scope, dashboardService, socket){
     $scope.log = [];
 
     let promises = [];
@@ -10,5 +10,10 @@ function DashboardController($scope, dashboardService){
         $scope.log = results[0];
 
     })
+
+    socket.on('log:message', function(msg){
+        console.log(msg);
+        $scope.log.push(dashboardService.createMessage(msg))
+    });
 }
 app.controller('DashboardController',DashboardController);

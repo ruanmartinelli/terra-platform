@@ -51,10 +51,13 @@ const proxyChannel = {
                 "content": jsonMessage["d8"].concat(jsonMessage["d16"]).concat(jsonMessage["d32"])
             }
 
-            messageModel.add(messageToSave);
+            // saves message to database
+            messageModel.add(messageToSave)
+            .then(m => {
+                io.emit('log:message', m);
+            });
 
-            // TODO emit message via socket;
-            io.emit('new_data', messages[1]);
+            // sends message to client
         });
     }
 }
