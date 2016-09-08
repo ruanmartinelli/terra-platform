@@ -10,7 +10,6 @@ ProgBin = require "ProgBin"
 
 conf = require "conf"
 
---siudfgyuskdygfsduygousdygtuys
 
 --variaveis de controle
 s_sourceDir =   conf.s_sourceDir; -- 'files_vmx'
