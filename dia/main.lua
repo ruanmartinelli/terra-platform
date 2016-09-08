@@ -37,12 +37,11 @@ function Handler:get()
 end
 
 function Handler:post()
-print(self.request.body)
---conteudo = self.request.body;
 local json = turbo.escape.json_decode(self.request.body);
 conteudo = json.conteudo;
 
 enviou = false;
+exit = false;
 
 while not(exit) do
 
