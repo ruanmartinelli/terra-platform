@@ -14,6 +14,7 @@ function DashboardController($scope, dashboardService, socket){
 
     socket.on('log:message', function(msg){
         $scope.log.push(dashboardService.createMessage(msg))
+        dashboardService.updateChart($scope.chart, msg)
     });
 }
 app.controller('DashboardController',DashboardController);
