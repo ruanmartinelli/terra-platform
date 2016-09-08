@@ -1,5 +1,5 @@
 var app = angular.module('terraweb',
-['ngRoute', 'ui.bootstrap', 'ngAnimate', 'angular-loading-bar', 'angularUtils.directives.dirPagination', 'ngFileUpload']);
+['ngRoute', 'ui.bootstrap', 'ngAnimate', 'angular-loading-bar', 'angularUtils.directives.dirPagination', 'ngFileUpload', 'chart.js']);
 
 app.factory('socket', ['$rootScope', function ($rootScope) {
   var socket = io.connect();

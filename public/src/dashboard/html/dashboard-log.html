@@ -1,4 +1,4 @@
-<div class="box">
+<!-- <div class="box">
     <div class="row">
         <div class="col-lg-10 col-lg-offset-1">
             <div class="form-group">
@@ -13,6 +13,33 @@
                 </select>
             </fieldset>
             </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="box">
+    <div class="box-header with-border">
+        <h3 class="box-title">Message Log</h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                <i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove">
+                <i class="fa fa-times"></i>
+            </button>
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="form-group">
+            <fieldset class="form-group">
+                <select class="form-control"
+                    multiple=""
+                    size="10"
+                    ng-model="q"
+                    ng-options="m for m in log"
+                    required show-tail>
+            </select>
+        </fieldset>
         </div>
     </div>
 </div>

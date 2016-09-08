@@ -1,17 +1,37 @@
 app.factory('dashboardService', ['$http', '$location',function($http, $location) {
     return {
-        getMessageLog : function() {
+        getMessages : function() {
             return $http.post('/api/messages/', {})
             .then(res => {
-                let log = [];
-                _.forEach(res.data, (mObject) => { log.push(this.createMessage(mObject))})
-                return log
+                return res.data
             }, errorHandler)
         },
         createMessage: function(object){
             return "[" + object.created_at +"]" + "  Sensor " + object.id_sensor + "  | Message Content: " + object.content;
-        }
+        },
+        createLogFromMessages: function(messages){
+            let log = [];
+            _.forEach(messages, (mObject) => { log.push(this.createMessage(mObject))})
+            return log
+        },
+        createChartFromMessages: function(log){
+            let labels = [];
+            let data = [];
+            let stop = 0;
+            _.forEachRight(log, l => {
+                if(stop < 30){
+                    labels.push (l.created_at);
+                    data.push   (l.content);
+                }
+                stop++;
+            })
+            data = [data]; // needs to be a double array
 
+            return {
+                data,
+                labels
+            }
+        }
     };
 } ]);
 
