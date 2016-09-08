@@ -2,6 +2,9 @@ const zmq = require('zmq');
 const subscriber = zmq.socket('sub')
 const config = require('../config')
 const messageModel = require('../model/message-model')
+const OFFLINE_MSG = "OFFLINE";
+const ONLINE_MSG = "ONLINE";
+// more zmq events can be found at https://www.npmjs.com/package/zmq
 
 const proxyChannel = {
     init: function(){
@@ -10,14 +13,24 @@ const proxyChannel = {
     },
 
     listen: function(io){
-        console.log("Listening notifications from " + config.channel.pub_name + " channel.");
+        var PROXY_CONNECTED = false;
+        var WEB_CONNECTED = false;
 
-        io.on('connection', function(socket){
-            console.log("Web Client connected!");
+        console.log("Listening notifications from " + config.channel.pub_name + " channel.");
+        /* -- ZeroMQ -- */
+
+        // monitors connection every 500ms
+        subscriber.monitor(500, 0);
+
+        // zmq events monitored
+        subscriber.on('connect', (fd, ep) => {
+            PROXY_CONNECTED = true;
+            io.emit('status:proxy', [ONLINE_MSG, ep]);
         });
 
-        subscriber.on('disconnect', function(){
-            console.log("Disconnected from channel.");
+        subscriber.on('disconnect', function(fd, ep){
+            PROXY_CONNECTED = false;
+            io.emit('status:proxy', [OFFLINE_MSG, ep]);
         });
 
         // listens for messages from the proxy
@@ -56,8 +69,24 @@ const proxyChannel = {
             .then(m => {
                 io.emit('log:message', m);
             });
+            /* -- END ZeroMQ -- */
 
-            // sends message to client
+
+
+            /* -- WebSockets -- */
+            io.on('connection', function(socket){
+                WEB_CONNECTED = true;
+                io.emit('status:core', [ONLINE_MSG, ""]);
+
+                if(PROXY_CONNECTED) io.emit('status:proxy', [ONLINE_MSG, ""]);
+                if(!PROXY_CONNECTED) io.emit('status:proxy', [OFFLINE_MSG, ""]);
+            });
+
+            io.on('disconnect', function(socket){
+                WEB_CONNECTED = false;
+                io.emit('status:core', [OFFLINE_MSG, ""]);
+            });
+            /* -- END WebSockets -- */
         });
     }
 }
