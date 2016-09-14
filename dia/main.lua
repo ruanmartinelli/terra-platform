@@ -52,7 +52,7 @@ while not(mote) do
   mote = tossam.connect
     {
     protocol = "sf",
-    host     = "192.168.65.134",
+    host     = "192.168.65.138",
     port     = 9002,
     nodeid   = 1
   }
