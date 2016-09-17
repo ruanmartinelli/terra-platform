@@ -13,9 +13,9 @@ socket.bind(port, function(err) {
 
   setInterval(function() {
     var symbol = stocks[Math.floor(Math.random()*stocks.length)]
-      , value = Math.random()*1000;
+      , value = Math.floor(Math.random()*1000);
 
     console.log(socket.identity + ': sent ' + symbol + ' ' + value);
     socket.send(symbol + ' ' + value);
-  },3000);
+  },1500);
 });

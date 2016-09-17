@@ -1,0 +1,18 @@
+package com.sample
+ 
+import com.sample.model.Temperature
+
+rule "Fervendo"
+  when
+  $dado : Temperature( temp > 100 )
+  then
+  System.out.println("A agua esta Fervendo!");
+end
+  
+rule "Fria"
+  when
+  $dado : Temperature( temp < 100 )
+  then
+  System.out.println("A agua NAO esta Fervendo!");
+  
+end
