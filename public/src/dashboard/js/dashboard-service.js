@@ -30,11 +30,11 @@ app.factory('dashboardService', ['$http', '$location',function($http, $location)
             return { data, labels }
         },
         updateChart: function(chart, message){
-            chart.data      = _.drop(chart.data, 1);
+            chart.data[0]      = _.drop(chart.data[0], 1);
             chart.labels    = _.drop(chart.labels, 1);
 
             chart.labels.push   (message.created_at);
-            chart.data.push     (message.content);
+            chart.data[0].push     (message.content);
         }
     };
 } ]);
