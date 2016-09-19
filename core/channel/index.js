@@ -61,7 +61,9 @@ const proxyChannel = {
                 "id_sensor" : 562, // TODO remove hardcoding
                 "number" : jsonMessage["msgID"],
                 "target": jsonMessage["Target"],
-                "content": jsonMessage["d8"].concat(jsonMessage["d16"]).concat(jsonMessage["d32"])
+                // "content": jsonMessage["d8"].concat(jsonMessage["d16"]).concat(jsonMessage["d32"])
+                "content": jsonMessage["d16"].concat(jsonMessage["d32"]).concat(00)
+
             }
 
             // saves message to database
@@ -75,6 +77,12 @@ const proxyChannel = {
 
             /* -- WebSockets -- */
             io.on('connection', function(socket){
+                socket.on('disconnect', function(){
+                    WEB_CONNECTED = false;
+                    io.emit('status:core', [OFFLINE_MSG, ""]);
+                });
+                console.log("Connected SOCKET");
+
                 WEB_CONNECTED = true;
                 io.emit('status:core', [ONLINE_MSG, ""]);
 
