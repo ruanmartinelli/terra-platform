@@ -14,7 +14,7 @@ const config = {
         },
         "channel":{
             "pub_name": "test",
-            "addr":"tcp://192.168.0.16:5563"
+            "addr":"tcp://172.20.72.42:5563"
         }
     }
 }
