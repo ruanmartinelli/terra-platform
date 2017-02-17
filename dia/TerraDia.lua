@@ -1,5 +1,5 @@
 
-FileMonitor = require "FileMonitor"
+
 
 local tossam = require("tossam")
 
@@ -52,7 +52,7 @@ while not(mote) do
   mote = tossam.connect
     {
     protocol = "sf",
-    host     = "192.168.65.138",
+    host     = "192.168.107.131",
     port     = 9002,
     nodeid   = 1
   }
@@ -174,7 +174,7 @@ end
            -- version_file = io.open("versionID.lua", "w")
            -- version_file:write(msg.versionID .. '')
            -- version_file:close()
-
+--
            -- vID = msg.versionID + 1;
           end
 
